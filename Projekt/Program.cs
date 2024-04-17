@@ -19,7 +19,9 @@ namespace PMLabs
 
     class Program
     {
-        static Cube cube = new Cube();
+        static Cube body = new Cube();
+        static Cube leftArm = new Cube();
+        static Cube rightArm = new Cube();
 
         static float speed_y; //Prędkość obrotu wokół osi Y [rad/s]
         static float speed_x; //Prędkość obrotu wokół osi X [rad/s]
@@ -62,7 +64,7 @@ namespace PMLabs
             GL.Clear(ClearBufferMask.ColorBufferBit| ClearBufferMask.DepthBufferBit);
 
             mat4 V = mat4.LookAt(
-                new vec3(0.0f, 0.0f, -5.0f),
+                new vec3(0.0f, 0.0f, -10.0f),
                 new vec3(0.0f, 0.0f, 0.0f),
                 new vec3(0.0f, 1.0f, 0.0f));
             mat4 P = mat4.Perspective(glm.Radians(50.0f), 1.0f, 1.0f, 50.0f);
@@ -72,14 +74,29 @@ namespace PMLabs
             GL.UniformMatrix4(DemoShaders.spLambert.U("V"), 1, false, V.Values1D);
 
             //mat4 M = mat4.Identity;
-            mat4 M = mat4.Rotate(angle_y, new vec3(0, 1, 0)) * mat4.Rotate(angle_x, new vec3(1, 0, 0));
-            M *= mat4.Scale(new vec3(0.5f, 0.5f, 0.5f));
-            M *= mat4.Scale(new vec3(1.0f, 2.0f, 1.0f));
-            GL.UniformMatrix4(DemoShaders.spLambert.U("M"), 1, false, M.Values1D);
 
-            // TU RYSUJEMY
+            // Korpus robota
+            mat4 MBody = mat4.Rotate(angle_y, new vec3(0, 1, 0)) * mat4.Rotate(angle_x, new vec3(1, 0, 0));
+            MBody *= mat4.Scale(new vec3(1.0f, 2.0f, 1.0f));
+            GL.UniformMatrix4(DemoShaders.spLambert.U("M"), 1, false, MBody.Values1D);
             GL.Uniform4(DemoShaders.spConstant.U("color"), 0f, 1f, 1f, 1f);
-            cube.drawSolid();
+            body.drawSolid();
+
+            // Lewa reka robota
+            mat4 MLeftArm = mat4.Rotate(angle_y, new vec3(0, 1, 0)) * mat4.Rotate(angle_x, new vec3(1, 0, 0));
+            MLeftArm *= mat4.Scale(new vec3(0.5f, 1.5f, 0.5f));
+            MLeftArm *= mat4.Translate(new vec3(3.0f, 0.25f, 0.0f));
+            GL.UniformMatrix4(DemoShaders.spLambert.U("M"), 1, false, MLeftArm.Values1D);
+            GL.Uniform4(DemoShaders.spConstant.U("color"), 1f, 0f, 0f, 1f);
+            leftArm.drawSolid();
+
+            // Prawa reka robota
+            mat4 MRightArm = mat4.Rotate(angle_y, new vec3(0, 1, 0)) * mat4.Rotate(angle_x, new vec3(1, 0, 0));
+            MRightArm *= mat4.Scale(new vec3(0.5f, 1.5f, 0.5f));
+            MRightArm *= mat4.Translate(new vec3(-3.0f, 0.25f, 0.0f));
+            GL.UniformMatrix4(DemoShaders.spLambert.U("M"), 1, false, MRightArm.Values1D);
+            GL.Uniform4(DemoShaders.spConstant.U("color"), 1f, 0f, 0f, 1f);
+            rightArm.drawSolid();
 
             Glfw.SwapBuffers(window);
         }
