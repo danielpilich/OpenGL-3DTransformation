@@ -49,6 +49,8 @@ namespace PMLabs
             // Czyszczenie okna na kolor czarny
             GL.ClearColor(0, 0, 0, 1);
 
+            GL.Enable(EnableCap.DepthTest);
+
             // Ładowanie programów cieniujących
             DemoShaders.InitShaders("Shaders\\");
 
@@ -65,16 +67,19 @@ namespace PMLabs
                 new vec3(0.0f, 1.0f, 0.0f));
             mat4 P = mat4.Perspective(glm.Radians(50.0f), 1.0f, 1.0f, 50.0f);
 
-            DemoShaders.spConstant.Use();
-            GL.UniformMatrix4(DemoShaders.spConstant.U("P"), 1, false, P.Values1D);
-            GL.UniformMatrix4(DemoShaders.spConstant.U("V"), 1, false, V.Values1D);
+            DemoShaders.spLambert.Use();
+            GL.UniformMatrix4(DemoShaders.spLambert.U("P"), 1, false, P.Values1D);
+            GL.UniformMatrix4(DemoShaders.spLambert.U("V"), 1, false, V.Values1D);
 
             //mat4 M = mat4.Identity;
             mat4 M = mat4.Rotate(angle_y, new vec3(0, 1, 0)) * mat4.Rotate(angle_x, new vec3(1, 0, 0));
-            GL.UniformMatrix4(DemoShaders.spConstant.U("M"), 1, false, M.Values1D);
+            M *= mat4.Scale(new vec3(0.5f, 0.5f, 0.5f));
+            M *= mat4.Scale(new vec3(1.0f, 2.0f, 1.0f));
+            GL.UniformMatrix4(DemoShaders.spLambert.U("M"), 1, false, M.Values1D);
 
             // TU RYSUJEMY
-            cube.drawWire();
+            GL.Uniform4(DemoShaders.spConstant.U("color"), 0f, 1f, 1f, 1f);
+            cube.drawSolid();
 
             Glfw.SwapBuffers(window);
         }
