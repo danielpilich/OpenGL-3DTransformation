@@ -22,6 +22,8 @@ namespace PMLabs
         static Cube body = new Cube();
         static Cube leftArm = new Cube();
         static Cube rightArm = new Cube();
+        static Cube leftLeg = new Cube();
+        static Cube rightLeg = new Cube();
 
         static float speed_y; //Prędkość obrotu wokół osi Y [rad/s]
         static float speed_x; //Prędkość obrotu wokół osi X [rad/s]
@@ -97,6 +99,22 @@ namespace PMLabs
             GL.UniformMatrix4(DemoShaders.spLambert.U("M"), 1, false, MRightArm.Values1D);
             GL.Uniform4(DemoShaders.spConstant.U("color"), 1f, 0f, 0f, 1f);
             rightArm.drawSolid();
+
+            // Lewa noga robota
+            mat4 MLeftLeg = mat4.Rotate(angle_y, new vec3(0, 1, 0)) * mat4.Rotate(angle_x, new vec3(1, 0, 0));
+            MLeftLeg *= mat4.Scale(new vec3(0.5f, 1.5f, 0.5f));
+            MLeftLeg *= mat4.Translate(new vec3(1.1f, -2.35f, 0.0f));
+            GL.UniformMatrix4(DemoShaders.spLambert.U("M"), 1, false, MLeftLeg.Values1D);
+            GL.Uniform4(DemoShaders.spConstant.U("color"), 1f, 0f, 0f, 1f);
+            leftLeg.drawSolid();
+
+            // Prawa noga robota
+            mat4 MRightLeg = mat4.Rotate(angle_y, new vec3(0, 1, 0)) * mat4.Rotate(angle_x, new vec3(1, 0, 0));
+            MRightLeg *= mat4.Scale(new vec3(0.5f, 1.5f, 0.5f));
+            MRightLeg *= mat4.Translate(new vec3(-1.1f, -2.35f, 0.0f));
+            GL.UniformMatrix4(DemoShaders.spLambert.U("M"), 1, false, MRightLeg.Values1D);
+            GL.Uniform4(DemoShaders.spConstant.U("color"), 1f, 0f, 0f, 1f);
+            rightLeg.drawSolid();
 
             Glfw.SwapBuffers(window);
         }
