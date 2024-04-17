@@ -89,7 +89,7 @@ namespace PMLabs
             mat4 MBody = mat4.Rotate(angle_y, new vec3(0, 1, 0)) * mat4.Rotate(angle_x, new vec3(1, 0, 0));
             MBody *= mat4.Scale(new vec3(1.0f, 2.0f, 1.0f));
             GL.UniformMatrix4(DemoShaders.spLambert.U("M"), 1, false, MBody.Values1D);
-            GL.Uniform4(DemoShaders.spConstant.U("color"), 0f, 1f, 1f, 1f);
+            GL.Uniform4(DemoShaders.spLambert.U("color"), 0f, 1f, 1f, 1f);
             body.drawSolid();
 
             // Lewa reka robota
@@ -97,11 +97,11 @@ namespace PMLabs
             MLeftArm *= mat4.Scale(new vec3(0.5f, 0.75f, 0.5f));
             MLeftArm *= mat4.Translate(new vec3(3.0f, 1.5f, 0.0f));
             GL.UniformMatrix4(DemoShaders.spLambert.U("M"), 1, false, MLeftArm.Values1D);
-            GL.Uniform4(DemoShaders.spConstant.U("color"), 1f, 0f, 0f, 1f);
+            GL.Uniform4(DemoShaders.spLambert.U("color"), 1f, 0f, 0f, 1f);
             leftArm1.drawSolid();
             MLeftArm *= mat4.Translate(new vec3(0.0f, -2.0f, 0.0f));
             GL.UniformMatrix4(DemoShaders.spLambert.U("M"), 1, false, MLeftArm.Values1D);
-            GL.Uniform4(DemoShaders.spConstant.U("color"), 1f, 0.25f, 0f, 1f);
+            GL.Uniform4(DemoShaders.spLambert.U("color"), 1f, 0.25f, 0f, 1f);
             leftArm2.drawSolid();
 
             // Prawa reka robota
@@ -109,11 +109,11 @@ namespace PMLabs
             MRightArm *= mat4.Scale(new vec3(0.5f, 0.75f, 0.5f));
             MRightArm *= mat4.Translate(new vec3(-3.0f, 1.5f, 0.0f));
             GL.UniformMatrix4(DemoShaders.spLambert.U("M"), 1, false, MRightArm.Values1D);
-            GL.Uniform4(DemoShaders.spConstant.U("color"), 1f, 0f, 0f, 1f);
+            GL.Uniform4(DemoShaders.spLambert.U("color"), 1f, 0f, 0f, 1f);
             rightArm1.drawSolid();
             MRightArm *= mat4.Translate(new vec3(0.0f, -2.0f, 0.0f));
             GL.UniformMatrix4(DemoShaders.spLambert.U("M"), 1, false, MRightArm.Values1D);
-            GL.Uniform4(DemoShaders.spConstant.U("color"), 1f, 0.25f, 0f, 1f);
+            GL.Uniform4(DemoShaders.spLambert.U("color"), 1f, 0.25f, 0f, 1f);
             rightArm1.drawSolid();
 
             // Lewa noga robota
@@ -121,11 +121,11 @@ namespace PMLabs
             MLeftLeg *= mat4.Scale(new vec3(0.5f, 0.75f, 0.5f));
             MLeftLeg *= mat4.Translate(new vec3(1.1f, -3.7f, 0.0f));
             GL.UniformMatrix4(DemoShaders.spLambert.U("M"), 1, false, MLeftLeg.Values1D);
-            GL.Uniform4(DemoShaders.spConstant.U("color"), 1f, 0f, 0f, 1f);
+            GL.Uniform4(DemoShaders.spLambert.U("color"), 1f, 0f, 0f, 1f);
             leftLeg1.drawSolid();
             MLeftLeg *= mat4.Translate(new vec3(0.0f, -2.0f, 0.0f));
             GL.UniformMatrix4(DemoShaders.spLambert.U("M"), 1, false, MLeftLeg.Values1D);
-            GL.Uniform4(DemoShaders.spConstant.U("color"), 1f, 0.25f, 0f, 1f);
+            GL.Uniform4(DemoShaders.spLambert.U("color"), 1f, 0.25f, 0f, 1f);
             leftLeg2.drawSolid();
 
             // Prawa noga robota
@@ -133,11 +133,11 @@ namespace PMLabs
             MRightLeg *= mat4.Scale(new vec3(0.5f, 0.75f, 0.5f));
             MRightLeg *= mat4.Translate(new vec3(-1.1f, -3.7f, 0.0f));
             GL.UniformMatrix4(DemoShaders.spLambert.U("M"), 1, false, MRightLeg.Values1D);
-            GL.Uniform4(DemoShaders.spConstant.U("color"), 1f, 0f, 0f, 1f);
+            GL.Uniform4(DemoShaders.spLambert.U("color"), 1f, 0f, 0f, 1f);
             rightLeg1.drawSolid();
             MRightLeg *= mat4.Translate(new vec3(0.0f, -2.0f, 0.0f));
             GL.UniformMatrix4(DemoShaders.spLambert.U("M"), 1, false, MRightLeg.Values1D);
-            GL.Uniform4(DemoShaders.spConstant.U("color"), 1f, 0.25f, 0f, 1f);
+            GL.Uniform4(DemoShaders.spLambert.U("color"), 1f, 0.25f, 0f, 1f);
             rightLeg2.drawSolid();
 
             Glfw.SwapBuffers(window);
