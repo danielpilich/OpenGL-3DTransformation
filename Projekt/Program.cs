@@ -69,8 +69,9 @@ namespace PMLabs
             Glfw.SetKeyCallback(window, kc); //Zarejestruj metodę obsługi klawiatury
         }
 
-        public static void DrawScene(Window window, float angle_x, float angle_y)
+        public static void DrawScene(Window window,float angle_x, float angle_y)
         {
+
             GL.Clear(ClearBufferMask.ColorBufferBit| ClearBufferMask.DepthBufferBit);
 
             mat4 V = mat4.LookAt(
@@ -86,14 +87,14 @@ namespace PMLabs
             //mat4 M = mat4.Identity;
 
             // Korpus robota
-            mat4 MBody = mat4.Rotate(angle_y, new vec3(0, 1, 0)) * mat4.Rotate(angle_x, new vec3(1, 0, 0));
+            mat4 MBody = mat4.Rotate(angle_y, new vec3(0, 1, 0));
             MBody *= mat4.Scale(new vec3(1.0f, 2.0f, 1.0f));
             GL.UniformMatrix4(DemoShaders.spLambert.U("M"), 1, false, MBody.Values1D);
             GL.Uniform4(DemoShaders.spLambert.U("color"), 0f, 1f, 1f, 1f);
             body.drawSolid();
 
             // Lewa reka robota
-            mat4 MLeftArm = mat4.Rotate(angle_y, new vec3(0, 1, 0)) * mat4.Rotate(angle_x, new vec3(1, 0, 0));
+            mat4 MLeftArm = mat4.Rotate(angle_y, new vec3(0, 1, 0));
             MLeftArm *= mat4.Scale(new vec3(0.5f, 0.75f, 0.5f));
             MLeftArm *= mat4.Translate(new vec3(3.0f, 1.5f, 0.0f));
             GL.UniformMatrix4(DemoShaders.spLambert.U("M"), 1, false, MLeftArm.Values1D);
@@ -105,7 +106,7 @@ namespace PMLabs
             leftArm2.drawSolid();
 
             // Prawa reka robota
-            mat4 MRightArm = mat4.Rotate(angle_y, new vec3(0, 1, 0)) * mat4.Rotate(angle_x, new vec3(1, 0, 0));
+            mat4 MRightArm = mat4.Rotate(angle_y, new vec3(0, 1, 0));
             MRightArm *= mat4.Scale(new vec3(0.5f, 0.75f, 0.5f));
             MRightArm *= mat4.Translate(new vec3(-3.0f, 1.5f, 0.0f));
             GL.UniformMatrix4(DemoShaders.spLambert.U("M"), 1, false, MRightArm.Values1D);
@@ -129,7 +130,7 @@ namespace PMLabs
             leftLeg2.drawSolid();
 
             // Prawa noga robota
-            mat4 MRightLeg = mat4.Rotate(angle_y, new vec3(0, 1, 0)) * mat4.Rotate(angle_x, new vec3(1, 0, 0));
+            mat4 MRightLeg = mat4.Rotate(angle_y, new vec3(0, 1, 0)) * mat4.Rotate(-angle_x, new vec3(1, 0, 0));
             MRightLeg *= mat4.Scale(new vec3(0.5f, 0.75f, 0.5f));
             MRightLeg *= mat4.Translate(new vec3(-1.1f, -3.7f, 0.0f));
             GL.UniformMatrix4(DemoShaders.spLambert.U("M"), 1, false, MRightLeg.Values1D);
@@ -171,7 +172,11 @@ namespace PMLabs
                 angle_x += speed_x * (float)Glfw.Time; //Aktualizuj kat obrotu wokół osi X zgodnie z prędkością obrotu
                 angle_y += speed_y * (float)Glfw.Time; //Aktualizuj kat obrotu wokół osi Y zgodnie z prędkością obrotu
                 Glfw.Time = 0; //Wyzeruj licznik czasu
-                DrawScene(window, angle_x, angle_y);
+                if (angle_x >= 0.3f || angle_x <= -0.3f)
+                {
+                    speed_x = -speed_x; // Change the direction of rotation if angle_x reaches 10 or -10 degrees
+                }
+                DrawScene(window,angle_x, angle_y);
 
                 Glfw.PollEvents();
             }
