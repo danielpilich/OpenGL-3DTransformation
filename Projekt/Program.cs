@@ -169,6 +169,7 @@ namespace PMLabs
 
             while (!Glfw.WindowShouldClose(window))
             {
+                if(speed_x == 0) angle_x = 0;
                 angle_x += speed_x * (float)Glfw.Time; //Aktualizuj kat obrotu wokół osi X zgodnie z prędkością obrotu
                 angle_y += speed_y * (float)Glfw.Time; //Aktualizuj kat obrotu wokół osi Y zgodnie z prędkością obrotu
                 Glfw.Time = 0; //Wyzeruj licznik czasu
