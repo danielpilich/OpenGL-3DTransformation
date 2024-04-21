@@ -33,6 +33,8 @@ namespace PMLabs
         static Cube rightLeg1 = new Cube();
         static Cube rightLeg2 = new Cube();
 
+        static Teapot head = new Teapot();
+
         static float speed_y; //Prędkość obrotu wokół osi Y [rad/s]
         static float speed_x; //Prędkość obrotu wokół osi X [rad/s]
         static KeyCallback kc = KeyProcessor;
@@ -139,6 +141,15 @@ namespace PMLabs
             GL.UniformMatrix4(DemoShaders.spLambert.U("M"), 1, false, MRightLeg.Values1D);
             GL.Uniform4(DemoShaders.spLambert.U("color"), 1f, 0.25f, 0f, 1f);
             rightLeg2.drawSolid();
+
+            // Głowa robota
+            mat4 MHead = mat4.Rotate(angle_y, new vec3(0, 1, 0)) * mat4.Rotate(angle_x, new vec3(1, 0, 0));
+            MHead *= mat4.RotateY(-1.56f);
+            MHead *= mat4.Scale(new vec3(2.0f, 2.0f, 2.0f));
+            MHead *= mat4.Translate(new vec3(0.0f, 1.38f, 0.0f));
+            GL.UniformMatrix4(DemoShaders.spLambert.U("M"), 1, false, MHead.Values1D);
+            GL.Uniform4(DemoShaders.spLambert.U("color"), 0.5f, 0.5f, 1f, 1f);
+            head.drawSolid();
 
             Glfw.SwapBuffers(window);
         }
