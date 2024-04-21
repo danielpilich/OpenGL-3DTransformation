@@ -144,7 +144,7 @@ namespace PMLabs
             rightLeg2.drawSolid();
 
             // Głowa robota
-            mat4 MHead = mat4.Rotate(angle_y, new vec3(0, 1, 0)) * mat4.Rotate(angle_x, new vec3(1, 0, 0));
+            mat4 MHead = mat4.Rotate(angle_y, new vec3(0, 1, 0));
             MHead *= mat4.RotateY(-1.56f);
             MHead *= mat4.Scale(new vec3(2.0f, 2.0f, 2.0f));
             MHead *= mat4.Translate(new vec3(0.0f, 1.38f, 0.0f));
