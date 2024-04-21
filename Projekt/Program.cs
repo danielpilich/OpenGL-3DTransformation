@@ -76,7 +76,7 @@ namespace PMLabs
             GL.Clear(ClearBufferMask.ColorBufferBit| ClearBufferMask.DepthBufferBit);
 
             mat4 V = mat4.LookAt(
-                new vec3(0.0f, 0.0f, -10.0f),
+                new vec3(0.0f, 10.0f, -10.0f),
                 new vec3(0.0f, 0.0f, 0.0f),
                 new vec3(0.0f, 1.0f, 0.0f));
             mat4 P = mat4.Perspective(glm.Radians(50.0f), 1.0f, 1.0f, 50.0f);
