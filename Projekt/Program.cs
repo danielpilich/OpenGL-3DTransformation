@@ -154,9 +154,9 @@ namespace PMLabs
 
             // Lewa reka robota
             mat4 MLeftArm = mat4.Rotate(angle_y, new vec3(0, 1, 0));
-            MLeftArm *= mat4.Scale(new vec3(0.3f, 0.75f, 0.3f));
             MLeftArm *= mat4.Translate(new vec3(4.2f, 1.5f, 0.0f));
             MLeftArm *= mat4.Rotate(clampedAngleLArm, new vec3(0, 0, 1)); // Local rotation around Z axis
+            MLeftArm *= mat4.Scale(new vec3(0.3f, 0.75f, 0.3f));
             GL.UniformMatrix4(DemoShaders.spLambert.U("M"), 1, false, MLeftArm.Values1D);
             GL.Uniform4(DemoShaders.spLambert.U("color"), 1f, 0f, 0f, 1f);
             leftArm1.drawSolid();
@@ -168,9 +168,9 @@ namespace PMLabs
 
             // Prawa reka robota
             mat4 MRightArm = mat4.Rotate(angle_y, new vec3(0, 1, 0)); // Global rotation around Y axis
-            MRightArm *= mat4.Scale(new vec3(0.3f, 0.75f, 0.3f));
             MRightArm *= mat4.Translate(new vec3(-4.2f, 1.5f, 0.0f)); // Translate to shoulder joint
             MRightArm *= mat4.Rotate(clampedAngleRArm, new vec3(0, 0, 1)); // Local rotation around Z axis
+            MRightArm *= mat4.Scale(new vec3(0.3f, 0.75f, 0.3f)); // Scale
             GL.UniformMatrix4(DemoShaders.spLambert.U("M"), 1, false, MRightArm.Values1D);
             GL.Uniform4(DemoShaders.spLambert.U("color"), 1f, 0f, 0f, 1f);
             rightArm1.drawSolid();
