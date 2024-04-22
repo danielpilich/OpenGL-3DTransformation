@@ -52,8 +52,8 @@ namespace PMLabs
         {
             if (state == InputState.Press)
             {
-                if (key == Keys.Left) speed_y = -3.14f;
-                if (key == Keys.Right) speed_y = 3.14f;
+                if (key == Keys.Left) speed_y = 3.14f;
+                if (key == Keys.Right) speed_y = -3.14f;
                 if (key == Keys.Up) speed_x = -3.14f;
                 if (key == Keys.Down) speed_x = 3.14f;
                 if (key == Keys.Q) speed_l_arm = 1f;
@@ -140,8 +140,7 @@ namespace PMLabs
             GL.UniformMatrix4(DemoShaders.spLambert.U("V"), 1, false, V.Values1D);
 
             // Donut
-            mat4 MTorus = mat4.Rotate(angle_y, new vec3(0, 1, 0));
-            MTorus *= mat4.Translate(new vec3(0.0f, 0.0f, 10.0f));
+            mat4 MTorus = mat4.Translate(new vec3(0.0f, 0.0f, 10.0f));
             GL.UniformMatrix4(DemoShaders.spLambert.U("M"), 1, false, MTorus.Values1D);
             GL.Uniform4(DemoShaders.spLambert.U("color"), 0.5f, 0.5f, 0.5f, 1f);
             torus.drawSolid();
