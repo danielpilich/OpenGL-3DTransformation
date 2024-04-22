@@ -20,6 +20,8 @@ namespace PMLabs
 
     class Program
     {
+        static Torus torus = new Torus();
+
         static Cube body = new Cube();
 
         static Cube leftArm1 = new Cube();
@@ -42,6 +44,7 @@ namespace PMLabs
         static float speed_l_arm; //Prędkość obrotu lewej ręki wokół osi Z [rad/s]
         static float speed_r_farm; //Prędkość obrotu prawego przedramienia wokół osi Z [rad/s]
         static float speed_l_farm; //Prędkość obrotu lewego przedramienia wokół osi Z [rad/s]
+
         static KeyCallback kc = KeyProcessor;
 
         //Obsługa klawiatury - zmiana prędkości obrotu wokół poszczególnych osi w zależności od wciśniętych klawiszy
@@ -136,7 +139,12 @@ namespace PMLabs
             GL.UniformMatrix4(DemoShaders.spLambert.U("P"), 1, false, P.Values1D);
             GL.UniformMatrix4(DemoShaders.spLambert.U("V"), 1, false, V.Values1D);
 
-            //mat4 M = mat4.Identity;
+            // Donut
+            mat4 MTorus = mat4.Rotate(angle_y, new vec3(0, 1, 0));
+            MTorus *= mat4.Translate(new vec3(0.0f, 0.0f, 10.0f));
+            GL.UniformMatrix4(DemoShaders.spLambert.U("M"), 1, false, MTorus.Values1D);
+            GL.Uniform4(DemoShaders.spLambert.U("color"), 0.5f, 0.5f, 0.5f, 1f);
+            torus.drawSolid();
 
             // Korpus robota
             mat4 MBody = mat4.Rotate(angle_y, new vec3(0, 1, 0));
