@@ -102,7 +102,7 @@ namespace PMLabs
 
             // Calculate the position of the camera relative to the model
             vec3 cameraPosition = new vec3(0.0f, 10.0f, -10.0f);
-            vec3 modelPosition = new vec3(0.0f, 0.0f, 0.0f);
+            vec3 modelPosition = new vec3(0.0f, -2.0f, 0.0f);
 
             // Calculate the rotated camera position around the model's origin
             float rotatedCameraX = cameraPosition.x * (float)Math.Cos(-angle_y) - cameraPosition.z * (float)Math.Sin(-angle_y);
@@ -154,8 +154,8 @@ namespace PMLabs
 
             // Lewa reka robota
             mat4 MLeftArm = mat4.Rotate(angle_y, new vec3(0, 1, 0));
-            MLeftArm *= mat4.Scale(new vec3(0.5f, 0.75f, 0.5f));
-            MLeftArm *= mat4.Translate(new vec3(3.0f, 1.5f, 0.0f));
+            MLeftArm *= mat4.Scale(new vec3(0.3f, 0.75f, 0.3f));
+            MLeftArm *= mat4.Translate(new vec3(4.2f, 1.5f, 0.0f));
             MLeftArm *= mat4.Rotate(clampedAngleLArm, new vec3(0, 0, 1)); // Local rotation around Z axis
             GL.UniformMatrix4(DemoShaders.spLambert.U("M"), 1, false, MLeftArm.Values1D);
             GL.Uniform4(DemoShaders.spLambert.U("color"), 1f, 0f, 0f, 1f);
@@ -168,8 +168,8 @@ namespace PMLabs
 
             // Prawa reka robota
             mat4 MRightArm = mat4.Rotate(angle_y, new vec3(0, 1, 0)); // Global rotation around Y axis
-            MRightArm *= mat4.Scale(new vec3(0.5f, 0.75f, 0.5f));
-            MRightArm *= mat4.Translate(new vec3(-3.0f, 1.5f, 0.0f)); // Translate to shoulder joint
+            MRightArm *= mat4.Scale(new vec3(0.3f, 0.75f, 0.3f));
+            MRightArm *= mat4.Translate(new vec3(-4.2f, 1.5f, 0.0f)); // Translate to shoulder joint
             MRightArm *= mat4.Rotate(clampedAngleRArm, new vec3(0, 0, 1)); // Local rotation around Z axis
             GL.UniformMatrix4(DemoShaders.spLambert.U("M"), 1, false, MRightArm.Values1D);
             GL.Uniform4(DemoShaders.spLambert.U("color"), 1f, 0f, 0f, 1f);
