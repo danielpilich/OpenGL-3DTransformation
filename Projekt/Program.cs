@@ -158,13 +158,13 @@ namespace PMLabs
             MLeftArm *= mat4.Rotate(clampedAngleLArm, new vec3(0, 0, 1)); // Local rotation around Z axis
             MLeftArm *= mat4.Scale(new vec3(0.3f, 0.75f, 0.3f));
             GL.UniformMatrix4(DemoShaders.spLambert.U("M"), 1, false, MLeftArm.Values1D);
-            GL.Uniform4(DemoShaders.spLambert.U("color"), 1f, 0f, 0f, 1f);
+            GL.Uniform4(DemoShaders.spLambert.U("color"), 0f, 1f, 1f, 1f);
             leftArm1.drawSolid();
-            MLeftArm *= mat4.Translate(new vec3(0.0f, -2.0f, 0.0f));
+            MLeftArm *= mat4.Translate(new vec3(0.0f, -1.0f, 0.0f));
             MLeftArm *= mat4.Scale(new vec3(1.0f / 0.3f, 1.0f / 0.75f, 1.0f / 0.3f));
             MLeftArm *= mat4.Rotate(clampedAngleLFArm, new vec3(0, 0, 1));
             MLeftArm *= mat4.Scale(new vec3(0.3f, 0.75f, 0.3f)); // Scale
-            MLeftArm *= mat4.Translate(new vec3(0.0f, -1.5f, 0.0f));
+            MLeftArm *= mat4.Translate(new vec3(0.0f, -1.0f, 0.0f));
             GL.UniformMatrix4(DemoShaders.spLambert.U("M"), 1, false, MLeftArm.Values1D);
             GL.Uniform4(DemoShaders.spLambert.U("color"), 1f, 0.25f, 0f, 1f);
             leftArm2.drawSolid();
@@ -175,13 +175,13 @@ namespace PMLabs
             MRightArm *= mat4.Rotate(clampedAngleRArm, new vec3(0, 0, 1)); // Local rotation around Z axis
             MRightArm *= mat4.Scale(new vec3(0.3f, 0.75f, 0.3f)); // Scale
             GL.UniformMatrix4(DemoShaders.spLambert.U("M"), 1, false, MRightArm.Values1D);
-            GL.Uniform4(DemoShaders.spLambert.U("color"), 1f, 0f, 0f, 1f);
+            GL.Uniform4(DemoShaders.spLambert.U("color"), 0f, 1f, 1f, 1f);
             rightArm1.drawSolid();
-            MRightArm *= mat4.Translate(new vec3(0.0f, -2.0f, 0.0f)); // Translate to forearm
+            MRightArm *= mat4.Translate(new vec3(0.0f, -1.0f, 0.0f)); // Translate to forearm
             MRightArm *= mat4.Scale(new vec3(1.0f / 0.3f, 1.0f / 0.75f, 1.0f / 0.3f));
             MRightArm *= mat4.Rotate(clampedAngleRFArm, new vec3(0, 0, 1));
             MRightArm *= mat4.Scale(new vec3(0.3f, 0.75f, 0.3f)); // Scale
-            MRightArm *= mat4.Translate(new vec3(0.0f, -1.5f, 0.0f));
+            MRightArm *= mat4.Translate(new vec3(0.0f, -1.0f, 0.0f));
             GL.UniformMatrix4(DemoShaders.spLambert.U("M"), 1, false, MRightArm.Values1D);
             GL.Uniform4(DemoShaders.spLambert.U("color"), 1f, 0.25f, 0f, 1f);
             rightArm2.drawSolid();
